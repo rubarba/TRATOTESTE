@@ -460,6 +460,9 @@ body.showing .toolbar,body.showing .navw,body.showing .clock,body.showing .units
 body.intro-on .toolbar,body.intro-on .clock,body.intro-on .brand,body.intro-on #labels,body.intro-on .navtip{opacity:0;pointer-events:none}
 .toolbar,.clock,.brand,#labels{transition:opacity .8s}
 @media (prefers-reduced-motion:reduce){ .intro *{animation:none!important} }
+.intro{display:none} body.intro-on .intro{display:grid}
+#loader.err{z-index:30;background:#0f2a20;color:#fff;text-transform:none;letter-spacing:0}
+.err-box{max-width:460px;text-align:center;padding:24px;font:400 15px/1.5 var(--f-body,system-ui)} .err-box b{display:block;font-size:22px;margin-bottom:10px} .err-box a{display:inline-block;margin-top:14px;background:#d8ffa3;color:#001c13;padding:12px 20px;border-radius:999px;font-weight:700;text-decoration:none}
 .brand-logo{display:block;height:46px;width:auto;margin-bottom:12px;filter:brightness(0) invert(1) drop-shadow(0 1px 2px rgba(0,28,19,.55)) drop-shadow(0 2px 10px rgba(0,28,19,.35))}
 .sh-logo{height:clamp(46px,6vw,78px);width:auto;margin:0 auto 22px;display:block;filter:brightness(0) invert(1)}
 .sh-card:not(.intro):not(.end) .sh-logo{display:none}
@@ -629,7 +632,8 @@ const SOURCES=`Fontes: <a href="https://www.tratolixo.pt" target="_blank" rel="n
 const canvas = document.getElementById('c');
 let renderer; let NIGHT=0; const IN_LIGHTS=[];
 try{ renderer = new THREE.WebGLRenderer({canvas, antialias:true, powerPreference:'high-performance'}); }
-catch(e){ document.getElementById('loader').innerHTML='<p id="err">O seu navegador não suporta WebGL. Experimente outro navegador ou ative a aceleração gráfica.</p>'; throw e; }
+catch(e){ try{ renderer = new THREE.WebGLRenderer({canvas, antialias:false}); }
+  catch(e2){ const L=document.getElementById('loader'); L.classList.add('err'); L.innerHTML='<div class="err-box"><b>Não foi possível abrir a maqueta 3D</b><p>Este visualizador não suporta gráficos 3D (WebGL). Se abriu o ficheiro numa pré-visualização (email, Pré-visualização rápida do Mac ou Teams), abra-o diretamente no Chrome, Edge ou Safari, ou use o link:</p><a href="https://rubarba.github.io/TRATOTESTE/">rubarba.github.io/TRATOTESTE</a></div>'; throw e2; } }
 const MOBILE = Math.min(innerWidth, innerHeight) < 700;
 renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.75 : 2));
 renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .86;
