@@ -8,3 +8,5 @@ Protótipo de visita 3D interativa ao Ecoparque de Trajouce, preparado para apre
 Navegação: arrastar para mover · botão direito ou Shift para rodar · roda do rato para aproximar · clique num edifício ou camião.
 
 Meteorologia: previsão MET Norway (CC BY 4.0). Protótipo; dados de capacidade e tonelagens com base em documentos públicos da Tratolixo.
+
+Pormenor de interior (exemplo da fase seguinte): Linha Ótica do Saco Verde – https://rubarba.github.io/TRATOTESTE/linha-otica/
